@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NON VEG MENU</title>
+  <style>
+    body {
+      animation: bgColorChange 3s infinite linear;
+      color: #2C003E;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    @keyframes bgColorChange {
+      0% { background-color: #FFE8F0; }
+      25% { background-color: #FFF0F5; }
+      50% { background-color: #F0FFFF; }
+      75% { background-color: #FFFACD; }
+      100% { background-color: #FFE8F0; }
+    }
+
+    h1 {
+      text-align: center;
+      background: linear-gradient(to right, #2C003E, #800040);
+      color: white;
+      padding: 20px;
+      margin: 0;
+      font-size: 40px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    table {
+      width: 90%;
+      margin: 30px auto;
+      border-spacing: 30px;
+    }
+
+    td {
+      text-align: center;
+      vertical-align: top;
+      background-color: #fff0f5;
+      border-radius: 15px;
+      padding: 15px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
+    }
+
+    td:hover {
+      background-color: #ffe0ec;
+      transform: scale(1.03);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    img {
+      width: 100%;
+      max-width: 350px;
+      height: 200px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.4);
+    }
+
+    h3 {
+      margin-top: 10px;
+      color: #800040;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    }
+
+    input[type="submit"] {
+      background-color: #2C003E;
+      color: white;
+      padding: 10px 25px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #800040;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    }
+
+    hr {
+      border: none;
+      border-top: 2px dashed #800040;
+      margin: 20px 0;
+    }
+
+    @media (max-width: 768px) {
+      table, tr, td {
+        display: block;
+        width: 90%;
+        margin: 0 auto 30px;
+      }
+
+      td {
+        margin-bottom: 30px;
+      }
+
+      img {
+        max-width: 90%;
+        height: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>NON VEG MENU</h1>
+  <hr>
+  <table>
+    <tr>
+      <td>
+        <a href="nonvegstarters.html">
+          <img src="nonvegstarters/0.jpg" alt="Starters">
+        </a>
+        <h3>STARTERS</h3>
+      </td>
+      <td>
+        <a href="nonvegsoups.html">
+          <img src="nonvegsoup/0.jpg" alt="Soups">
+        </a>
+        <h3>SOUPS</h3>
+      </td>
+      <td>
+        <a href="nonvegpizzas.html">
+          <img src="nonvegpizzas/0.jpg" alt="Pizzas">
+        </a>
+        <h3>PIZZAS</h3>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="nonvegburgers.html">
+          <img src="nonvegburgers/0.jpg" alt="Burgers">
+        </a>
+        <h3>BURGERS</h3>
+      </td>
+      <td>
+        <a href="nonvegbiriyanis.html">
+          <img src="nonvegbiriyani/0.jpg" alt="Biriyanis">
+        </a>
+        <h3>BIRIYANIS</h3>
+      </td>
+      <td>
+        <a href="nonvegnoodles.html">
+          <img src="nonvegnoodles/0.jpg" alt="Noodles">
+        </a>
+        <h3>NOODLES</h3>
+      </td>
+    </tr>
+  </table>
+  <hr>
+  <center>
+    <a href="majorproject1.html">
+      <input type="submit" value="Back">
+    </a>
+    <br><b>GO TO MAIN MENU</b>
+  </center>
+</body>
+</html>

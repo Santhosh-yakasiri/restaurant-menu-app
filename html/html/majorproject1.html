@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Namoora Sobagu</title>
+  <style>
+    @keyframes bgColorChange {
+      0%   { background-color: #f5e7e1; }  
+      10%  { background-color: #f8b195; }  
+      16%  { background-color: #f67280; }  
+      32%  { background-color: #c06c84; }   
+      48%  { background-color: #6c5b7b; }   
+      64%  { background-color: #355c7d; }   
+      80%  { background-color: #99b898; }   
+      100% { background-color: #f8b195; }   
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #4e342e;
+      animation: bgColorChange 18s infinite linear;
+      transition: background-color 3s ease;
+    }
+
+    h1 {
+      text-align: center;
+      padding: 20px;
+      margin: 0;
+      background-color: #6d4c41;
+      color: white;
+      font-size: 40px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+
+    .logo-container {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .logo-container img {
+      height: 200px;
+      width: 450px;
+      border-radius: 15px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+    }
+
+    .tagline {
+      font-size: 18px;
+      font-style: italic;
+      font-weight: bold;
+      color: #ffffff;
+      margin-top: 10px;
+      text-align: center;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+    }
+
+    table {
+      margin: 40px auto;
+      border-spacing: 30px;
+    }
+
+    td {
+      text-align: center;
+      background-color: #fff8e1;
+      padding: 20px;
+      border-radius: 15px;
+      transition: background-color 0.3s;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    td:hover {
+      background-color: #ffe0b2;
+    }
+
+    td img {
+      height: 250px;
+      width: 350px;
+      border-radius: 10px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    td img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+    }
+
+    h2 {
+      margin-top: 10px;
+      color: #3e2723;
+      text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+    }
+
+    @media (max-width: 768px) {
+      table, tr, td {
+        display: block;
+        width: 90%;
+        margin: 20px auto;
+      }
+
+      td img {
+        width: 100%;
+        height: auto;
+      }
+    }
+  /* Removed qty-select and select-btn styles as per user request */
+  </style>
+  <!-- Removed select button and quantity script as per user request -->
+</head>
+<body>
+
+
+  <h1>Namoora Sobagu</h1>
+
+  <div class="logo-container">
+    <img src="logo.jpg" alt="Restaurant Logo">
+    <div class="tagline">EXPERIENCE THE FLAVOURS LIKE NEVER BEFORE</div>
+  </div>
+
+  <table>
+    <tr>
+      <td>
+        <a href="mainprojectveg1.html">
+          <img src="veg.jpg" >
+        </a>
+  <h2>VEG</h2>
+      </td>
+
+      <td>
+        <a href="mainprojectnonveg.html">
+          <img src="nonveg.jpg" >
+        </a>
+  <h2>NON-VEG</h2>
+      </td>
+
+      <td>
+        <a href="desserts.html">
+          <img src="dessert.jpg">
+        </a>
+  <h2>DESSERTS</h2>
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>

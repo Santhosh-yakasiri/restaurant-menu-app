@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MENU IN DESSERTS</title>
+  <style>
+    body {
+      background: linear-gradient(to right top, #ffe5ec, #fff1f0, #fff0f5);
+      color: #6a0572;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      animation: fadeInBody 1s ease-in;
+    }
+
+    h1 {
+      text-align: center;
+      background: linear-gradient(to right, #ff69b4, #ffb6c1);
+      color: white;
+      padding: 20px;
+      margin: 0;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    table {
+      width: 90%;
+      margin: 30px auto;
+      border-spacing: 30px;
+    }
+
+    td {
+      text-align: center;
+      vertical-align: top;
+      padding: 10px;
+      border-radius: 15px;
+      background: linear-gradient(to bottom right, #ffffff, #ffe4ec);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    td:hover {
+      background: linear-gradient(to bottom right, #ffd6eb, #fff0f5);
+      transform: scale(1.02);
+    }
+
+    img {
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s, box-shadow 0.3s;
+      width: 100%;
+      max-width: 400px;
+      height: auto;
+    }
+
+    img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    h3 {
+      margin-top: 10px;
+      color: #d63384;
+      text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+    }
+
+    input[type="submit"] {
+      background-color: #d63384;
+      color: white;
+      padding: 10px 30px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s, box-shadow 0.3s;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    input[type="submit"]:hover {
+      background-color: #ad1457;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    center b {
+      display: block;
+      margin-top: 10px;
+      color: #6a0572;
+    }
+
+    hr {
+      border: none;
+      border-top: 2px dashed #d63384;
+      margin: 20px 0;
+    }
+
+    @media (max-width: 768px) {
+      table, tr, td {
+        display: block;
+        width: 100%;
+        text-align: center;
+      }
+
+      td {
+        margin-bottom: 30px;
+      }
+
+      img {
+        max-width: 90%;
+      }
+    }
+
+    @keyframes fadeInBody {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <h1>DESSERTS MENU</h1>
+  <hr>
+  <table>
+    <tr>
+      <td>
+        <a href="frozendes.html">
+          <img src="desserts/1.jpg" alt="Frozen Desserts">
+        </a>
+        <h3>FROZEN DESSERTS</h3>
+      </td>
+      <td>
+        <a href="pudding.html">
+          <img src="desserts/2.jpg" alt="Pudding & Custards">
+        </a>
+        <h3>PUDDING & CUSTARDS</h3>
+      </td>
+      <td>
+        <a href="cookies.html">
+          <img src="desserts/cookie.jpg" alt="Cookies & Biscuits">
+        </a>
+        <h3>COOKIES & BISCUITS</h3>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="frieddesserts.html">
+          <img src="desserts/frieddes.jpg" alt="Fried Desserts">
+        </a>
+        <h3>FRIED DESSERTS</h3>
+      </td>
+      <td>
+        <a href="cakes.html">
+          <img src="desserts/4.jpg" alt="Cakes & Pastries">
+        </a>
+        <h3>CAKES & PASTRIES</h3>
+      </td>
+      <td>
+        <a href="indiansweets.html">
+          <img src="desserts/3.jpg" alt="Indian Sweets">
+        </a>
+        <h3>INDIAN SWEETS</h3>
+      </td>
+    </tr>
+  </table>
+  <hr>
+  <center>
+    <a href="majorproject1.html">
+      <input type="submit" value="Back">
+    </a>
+    <b>GO TO MAIN MENU</b>
+  </center>
+</body>
+</html>

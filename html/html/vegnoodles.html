@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>VEG NOODLES</title>
+  <style>
+    #place-order-btn {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      background: #4B0082;
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      padding: 18px 36px;
+      font-size: 1.3rem;
+      font-weight: bold;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+      cursor: pointer;
+      z-index: 100;
+      transition: background 0.2s;
+      display: none;
+    }
+    #place-order-btn.show { display: block; }
+
+    #order-modal {
+      display: none;
+      position: fixed;
+      left: 0; top: 0; width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.4);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+    }
+    #order-modal .modal-content {
+      background: #fff;
+      margin: 10% auto;
+      padding: 30px 24px 18px 24px;
+      border-radius: 16px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+      position: relative;
+      text-align: center;
+      animation: modalIn 0.4s;
+    }
+    #order-modal .close { position: absolute; top: 10px; right: 18px; font-size: 1.5rem; color: #888; cursor: pointer; }
+    #order-summary-list { text-align: left; margin: 18px 0 12px 0; font-size: 1.1rem; }
+    #order-summary-list li { margin-bottom: 8px; }
+    @keyframes modalIn { from { opacity: 0; transform: scale(0.8);} to { opacity: 1; transform: scale(1);} }
+
+    .qty-bar {
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      z-index: 12;
+      pointer-events: auto;
+    }
+    .qty-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #fff;
+      color: #4B0082;
+      border: 2px solid #4B0082;
+      font-size: 1.4rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(75,0,130,0.10);
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      z-index: 13;
+    }
+    .qty-btn:hover { background: #4B0082; color: #fff; }
+    .qty-badge {
+      background: #4B0082; color: #fff;
+      border-radius: 50%; width: 32px; height: 32px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; font-weight: bold;
+      box-shadow: 0 2px 8px rgba(75,0,130,0.10);
+      border: 2px solid #fff;
+      opacity: 0.95; z-index: 14;
+      pointer-events: none;
+    }
+    .img-box.has-qty .qty-badge { opacity: 1; }
+
+    body {
+      background: linear-gradient(to right, #fff0f5, #e6e6fa, #f5f5dc);
+      color: #4B0082;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0; padding: 0;
+    }
+    h1 { text-align: center; background-color: #4B0082; color: white; padding: 20px; margin: 0; font-size: 36px; text-shadow: 2px 2px 5px rgba(0,0,0,0.3);}
+    table { width: 95%; margin: 30px auto; border-spacing: 25px;}
+    td { background-color: #ffffff; padding: 15px; border-radius: 15px; box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2); text-align: center; vertical-align: top; min-height: 430px; width: 33%;}
+    .img-box { position: relative; width: 100%; max-width: 350px; height: 220px; margin: auto;}
+    .item-img { width: 100%; height: 100%; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); transition: filter 0.3s, transform 0.3s; object-fit: cover;}
+    .img-box:hover .item-img { filter: blur(3px) brightness(0.7); transform: scale(1.04);}
+    .text-box {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      color: #800080; font-weight: bold; font-size: 20px;
+      background: rgba(255,255,255,0.7); border-radius: 10px;
+      opacity: 0; transition: opacity 0.25s; text-align: center; padding: 10px;
+      z-index: 6; pointer-events: none;
+    }
+    .img-box:hover .text-box { opacity: 1; }
+    h3 { margin: 10px 0 5px; color: #800080; font-size: 20px; text-shadow: 1px 1px 2px rgba(0,0,0,0.2);}
+    p { margin: 5px 0; font-weight: bold; font-size: 16px; text-shadow: 1px 1px 2px rgba(0,0,0,0.15);}
+    input[type="submit"] {
+      background-color: #4B0082; color: white; padding: 10px 25px; border: none; border-radius: 8px;
+      font-size: 15px; cursor: pointer; transition: background-color 0.3s; box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+    input[type="submit"]:hover { background-color: #6a1b9a;}
+    center b { display: block; margin-top: 10px; color: #4B0082; font-size: 16px; text-shadow: 1px 1px 2px rgba(0,0,0,0.2);}
+    hr { border: none; border-top: 2px dashed #4B0082; margin: 20px 0;}
+    @media (max-width: 768px) {
+      table, tr, td { display: block; width: 90%; margin: 20px auto; }
+      td { margin-bottom: 30px; }
+      img { max-width: 100%; height: auto; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Order Modal -->
+  <div id="order-modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeOrderModal()">&times;</span>
+      <h2>Order Summary</h2>
+      <ul id="order-summary-list"></ul>
+      <div id="order-total" style="font-weight:bold;margin-bottom:12px;"></div>
+      <button onclick="confirmOrder()" style="background:#4B0082;color:#fff;padding:10px 28px;border:none;border-radius:8px;font-size:1.1rem;">Confirm Order</button>
+    </div>
+  </div>
+
+  <button id="place-order-btn" onclick="showOrderModal()">Place Order</button>
+  <h1>VEG NOODLES</h1>
+  <hr>
+  <table>
+    <tr>
+      <td>
+        <div class="img-box">
+          <div class="text-box">HAKKA NOODLES<br>₹130</div>
+          <img src="vegnoodles/1.jpg" alt="Hakka Noodles" class="item-img">
+          <div class="qty-bar">
+            <button type="button" class="qty-btn minus" onclick="changeQty(this, -1)">-</button>
+            <span class="qty-badge">0</span>
+            <button type="button" class="qty-btn plus" onclick="changeQty(this, 1)">+</button>
+          </div>
+        </div>
+        <h3>HAKKA NOODLES</h3>
+        <p>Price: ₹130</p>
+      </td>
+      <td>
+        <div class="img-box">
+          <div class="text-box">SCHEZWAN NOODLES<br>₹140</div>
+          <img src="vegnoodles/2.jpg" alt="Schezwan Noodles" class="item-img">
+          <div class="qty-bar">
+            <button type="button" class="qty-btn minus" onclick="changeQty(this, -1)">-</button>
+            <span class="qty-badge">0</span>
+            <button type="button" class="qty-btn plus" onclick="changeQty(this, 1)">+</button>
+          </div>
+        </div>
+        <h3>SCHEZWAN NOODLES</h3>
+        <p>Price: ₹140</p>
+      </td>
+      <td>
+        <div class="img-box">
+          <div class="text-box">GARLIC NOODLES<br>₹135</div>
+          <img src="vegnoodles/3.jpg" alt="Garlic Noodles" class="item-img">
+          <div class="qty-bar">
+            <button type="button" class="qty-btn minus" onclick="changeQty(this, -1)">-</button>
+            <span class="qty-badge">0</span>
+            <button type="button" class="qty-btn plus" onclick="changeQty(this, 1)">+</button>
+          </div>
+        </div>
+        <h3>GARLIC NOODLES</h3>
+        <p>Price: ₹135</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div class="img-box">
+          <div class="text-box">VEG CHOW MEIN<br>₹120</div>
+          <img src="vegnoodles/4.jpg" alt="Veg Chow Mein" class="item-img">
+          <div class="qty-bar">
+            <button type="button" class="qty-btn minus" onclick="changeQty(this, -1)">-</button>
+            <span class="qty-badge">0</span>
+            <button type="button" class="qty-btn plus" onclick="changeQty(this, 1)">+</button>
+          </div>
+        </div>
+        <h3>VEG CHOW MEIN</h3>
+        <p>Price: ₹120</p>
+      </td>
+      <td>
+        <div class="img-box">
+          <div class="text-box">PEANUT BUTTER NOODLES<br>₹150</div>
+          <img src="vegnoodles/5.jpg" alt="Peanut Butter Noodles" class="item-img">
+          <div class="qty-bar">
+            <button type="button" class="qty-btn minus" onclick="changeQty(this, -1)">-</button>
+            <span class="qty-badge">0</span>
+            <button type="button" class="qty-btn plus" onclick="changeQty(this, 1)">+</button>
+          </div>
+        </div>
+        <h3>PEANUT BUTTER NOODLES</h3>
+        <p>Price: ₹150</p>
+      </td>
+      <td>
+        <div class="img-box">
+          <div class="text-box">THAI BASIL NOODLES<br>₹145</div>
+          <img src="vegnoodles/6.jpg" alt="Thai Basil Noodles" class="item-img">
+          <div class="qty-bar">
+            <button type="button" class="qty-btn minus" onclick="changeQty(this, -1)">-</button>
+            <span class="qty-badge">0</span>
+            <button type="button" class="qty-btn plus" onclick="changeQty(this, 1)">+</button>
+          </div>
+        </div>
+        <h3>THAI BASIL NOODLES</h3>
+        <p>Price: ₹145</p>
+      </td>
+    </tr>
+  </table>
+  <hr>
+  <center>
+    <a href="mainprojectveg1.html">
+      <input type="submit" value="Back">
+    </a>
+    <br><b>GO TO MAIN MENU</b>
+  </center>
+  <script>
+    function changeQty(btn, delta) {
+      var imgBox = btn.closest('.img-box');
+      if (!imgBox) return;
+      var badge = imgBox.querySelector('.qty-badge');
+      if (!badge) return;
+      var qty = parseInt(badge.textContent) || 0;
+      qty = qty + delta;
+      if (qty < 0) qty = 0;
+      badge.textContent = qty;
+      if (qty > 0) imgBox.classList.add('has-qty'); else imgBox.classList.remove('has-qty');
+      updateOrderBtn();
+    }
+
+    function updateOrderBtn() {
+      var show = false;
+      document.querySelectorAll('.qty-badge').forEach(function(badge) {
+        if (parseInt(badge.textContent) > 0) show = true;
+      });
+      var btn = document.getElementById('place-order-btn');
+      if (!btn) return;
+      if (show) btn.classList.add('show'); else btn.classList.remove('show');
+    }
+
+    function showOrderModal() {
+      var items = document.querySelectorAll('td');
+      var summary = [];
+      items.forEach(function(td) {
+        var name = td.querySelector('h3')?.innerText;
+        var price = td.querySelector('p')?.innerText.match(/\d+/)?.[0];
+        var qty = td.querySelector('.qty-badge')?.textContent;
+        if (name && price && qty && parseInt(qty) > 0) summary.push({ name, price, qty });
+      });
+      var list = document.getElementById('order-summary-list'); list.innerHTML = '';
+      var total = 0;
+      summary.forEach(function(item) {
+        var li = document.createElement('li');
+        li.textContent = item.name + ' x ' + item.qty + ' = ₹' + (parseInt(item.price)*parseInt(item.qty));
+        total += parseInt(item.price)*parseInt(item.qty);
+        list.appendChild(li);
+      });
+      document.getElementById('order-total').textContent = 'Total: ₹' + total;
+      document.getElementById('order-modal').style.display = 'flex';
+    }
+
+    function closeOrderModal(){ document.getElementById('order-modal').style.display = 'none'; }
+    function confirmOrder(){
+      alert('Order placed! Thank you.');
+      closeOrderModal();
+      document.querySelectorAll('.qty-badge').forEach(function(badge){ badge.textContent = 0; badge.closest('.img-box').classList.remove('has-qty'); });
+      updateOrderBtn();
+    }
+
+    window.addEventListener('click', function(e){
+      var modal = document.getElementById('order-modal');
+      if (modal && e.target === modal) closeOrderModal();
+    });
+  </script>
+</body>
+</html>

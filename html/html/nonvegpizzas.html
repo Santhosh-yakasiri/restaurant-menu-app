@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NON VEG PIZZAS</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      animation: bgCycle 3s infinite alternate;
+      color: #4B0082;
+    }
+    @keyframes bgCycle {
+      0% { background-color: #FFF0F5; }
+      25% { background-color: #FFFACD; }
+      50% { background-color: #F0FFFF; }
+      75% { background-color: #E6E6FA; }
+      100% { background-color: #FFE4E1; }
+    }
+    h1 {
+      text-align: center;
+      background-color: #4B0082;
+      color: white;
+      padding: 20px;
+      margin: 0;
+    }
+    table {
+      width: 90%;
+      margin: 30px auto;
+      border-spacing: 30px;
+    }
+    td {
+      position: relative;
+      background-color: #fff;
+      text-align: center;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+      width: 300px;
+      height: 370px;
+    }
+    .img-box {
+      position: relative;
+      width: 100%;
+      max-width: 350px;
+      height: 200px;
+      margin: auto;
+    }
+    .item-img {
+      width: 100%;
+      height: 100%;
+      border-radius: 12px;
+      display: block;
+      transition: filter 0.3s, transform 0.3s;
+      object-fit: cover;
+    }
+    .img-box:hover .item-img {
+      filter: blur(3px) brightness(0.7);
+      transform: scale(1.04);
+    }
+    .text-box {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: #4B0082;
+      background: rgba(255,255,255,0.7);
+      border: 2px dashed #4B0082;
+      border-radius: 10px;
+      z-index: 2;
+      text-align: center;
+      font-size: 20px;
+      padding: 10px;
+      transition: opacity 0.3s;
+      opacity: 0;
+    }
+    .img-box:hover .text-box {
+      opacity: 1;
+    }
+    h3 { margin: 10px 0 5px; color: #6a1b9a; }
+    p { margin: 5px 0; font-weight: bold; }
+    .qty-bar {
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      z-index: 12;
+      pointer-events: auto;
+    }
+    .qty-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #fff;
+      color: #4B0082;
+      border: 2px solid #4B0082;
+      font-size: 1.4rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(75,0,130,0.10);
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      z-index: 13;
+    }
+    .qty-btn:hover { background: #4B0082; color: #fff; }
+    .qty-badge {
+      background: #4B0082; color: #fff;
+      border-radius: 50%; width: 32px; height: 32px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; font-weight: bold;
+      box-shadow: 0 2px 8px rgba(75,0,130,0.10);
+      border: 2px solid #fff;
+      opacity: 0.95; z-index: 14;
+      pointer-events: none;
+    }
+    .img-box.has-qty .qty-badge { opacity: 1; }
+    #place-order-btn {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      background: #4B0082;
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      padding: 18px 36px;
+      font-size: 1.3rem;
+      font-weight: bold;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+      cursor: pointer;
+      z-index: 100;
+      transition: background 0.2s;
+      display: none;
+    }
+    #place-order-btn.show { display: block; }
+    #order-modal {
+      display: none;
+      position: fixed;
+      left: 0; top: 0; width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.4);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+    }
+    #order-modal .modal-content {
+      background: #fff;
+      margin: 10% auto;
+      padding: 30px 24px 18px 24px;
+      border-radius: 16px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+      position: relative;
+      text-align: center;
+      animation: modalIn 0.4s;
+    }
+    #order-modal .close {
+      position: absolute;
+      top: 10px;
+      right: 18px;
+      font-size: 1.5rem;
+      color: #888;
+      cursor: pointer;
+    }
+    #order-summary-list {
+      text-align: left;
+      margin: 18px 0 12px 0;
+      font-size: 1.1rem;
+    }
+    #order-summary-list li {
+      margin-bottom: 8px;
+    }
+    @keyframes modalIn {
+      from { opacity: 0; transform: scale(0.8);}
+      to { opacity: 1; transform: scale(1);}
+    }
+    @media (max-width: 768px) {
+      table, tr, td {
+        display: block;
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>NON VEG PIZZAS</h1>
+  <hr>
+  <table>
+    <tr>
+      <td data-name="Chicken Tikka Pizza" data-price="260">
+        <div class="img-box">
+          <div class="text-box">CHICKEN TIKKA PIZZA<br>₹260</div>
+          <img src="nonvegpizzas/1.jpg" class="item-img" alt="Chicken Tikka Pizza">
+          <div class="qty-bar">
+            <button class="qty-btn minus" onclick="changeQty(this, -1)">-</button>
+            <span class="qty-badge">0</span>
+            <button class="qty-btn plus" onclick="changeQty(this, 1)">+</button>
+          </div>
+        </div>
+        <h3>CHICKEN TIKKA PIZZA</h3>
+        <p>Price: ₹260</p>
+      </td>
+      <td data-name="Pepperoni Pizza" data-price="280">
+        <div class="img-box">
+          <div class="text-box">PEPPERONI PIZZA<br>₹280</div>
+          <img src="nonvegpizzas/2.jpg" class="item-img" alt="Pepperoni Pizza">
+          <div class="qty-bar">
+            <button class="qty-btn minus" onclick="changeQty(this, -1)">-</button>
+            <span class="qty-badge">0</span>
+            <button class="qty-btn plus" onclick="changeQty(this, 1)">+</button>
+          </div>
+        </div>
+        <h3>PEPPERONI PIZZA</h3>
+        <p>Price: ₹280</p>
+      </td>
+      <td data-name="BBQ Chicken Pizza" data-price="270">
+        <div class="img-box">
+          <div class="text-box">BBQ CHICKEN PIZZA<br>₹270</div>
+          <img src="nonvegpizzas/3.jpg" class="item-img" alt="BBQ Chicken Pizza">
+          <div class="qty-bar">
+            <button class="qty-btn minus" onclick="changeQty(this, -1)">-</button>
+            <span class="qty-badge">0</span>
+            <button class="qty-btn plus" onclick="changeQty(this, 1)">+</button>
+          </div>
+        </div>
+        <h3>BBQ CHICKEN PIZZA</h3>
+        <p>Price: ₹270</p>
+      </td>
+    </tr>
+    <tr>
+      <td data-name="Meat Lovers Pizza" data-price="290">
+        <div class="img-box">
+          <div class="text-box">MEAT LOVERS PIZZA<br>₹290</div>
+          <img src="nonvegpizzas/4.jpg" class="item-img" alt="Meat Lovers Pizza">
+          <div class="qty-bar">
+            <button class="qty-btn minus" onclick="changeQty(this, -1)">-</button>
+            <span class="qty-badge">0</span>
+            <button class="qty-btn plus" onclick="changeQty(this, 1)">+</button>
+          </div>
+        </div>
+        <h3>MEAT LOVERS PIZZA</h3>
+        <p>Price: ₹290</p>
+      </td>
+      <td data-name="Spicy Chicken Sausage Pizza" data-price="275">
+        <div class="img-box">
+          <div class="text-box">SPICY CHICKEN SAUSAGE PIZZA<br>₹275</div>
+          <img src="nonvegpizzas/5.jpg" class="item-img" alt="Spicy Chicken Sausage Pizza">
+          <div class="qty-bar">
+            <button class="qty-btn minus" onclick="changeQty(this, -1)">-</button>
+            <span class="qty-badge">0</span>
+            <button class="qty-btn plus" onclick="changeQty(this, 1)">+</button>
+          </div>
+        </div>
+        <h3>SPICY CHICKEN SAUSAGE PIZZA</h3>
+        <p>Price: ₹275</p>
+      </td>
+      <td data-name="Chicken Keema Pizza" data-price="265">
+        <div class="img-box">
+          <div class="text-box">CHICKEN KEEMA PIZZA<br>₹265</div>
+          <img src="nonvegpizzas/6.jpg" class="item-img" alt="Chicken Keema Pizza">
+          <div class="qty-bar">
+            <button class="qty-btn minus" onclick="changeQty(this, -1)">-</button>
+            <span class="qty-badge">0</span>
+            <button class="qty-btn plus" onclick="changeQty(this, 1)">+</button>
+          </div>
+        </div>
+        <h3>CHICKEN KEEMA PIZZA</h3>
+        <p>Price: ₹265</p>
+      </td>
+    </tr>
+  </table>
+
+  <button id="place-order-btn" onclick="showOrderModal()">Place Order</button>
+
+  <!-- Order Modal -->
+  <div id="order-modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeOrderModal()">&times;</span>
+      <h2>Order Summary</h2>
+      <ul id="order-summary-list"></ul>
+      <div id="order-total" style="font-weight:bold;margin-bottom:12px;"></div>
+      <button onclick="confirmOrder()" style="background:#4B0082;color:#fff;padding:10px 28px;border:none;border-radius:8px;font-size:1.1rem;">Confirm Order</button>
+    </div>
+  </div>
+
+  <hr>
+  <center>
+    <a href="mainprojectnonveg.html">
+      <input type="submit" value="Back">
+    </a><br>
+    <b>GO TO MAIN MENU</b>
+  </center>
+
+  <script>
+    function changeQty(btn, delta) {
+      var imgBox = btn.closest('.img-box');
+      if (!imgBox) return;
+      var badge = imgBox.querySelector('.qty-badge');
+      if (!badge) return;
+      var qty = parseInt(badge.textContent) || 0;
+      qty = qty + delta;
+      if (qty < 0) qty = 0;
+      badge.textContent = qty;
+      if (qty > 0) imgBox.classList.add('has-qty');
+      else imgBox.classList.remove('has-qty');
+      updateOrderBtn();
+    }
+    function updateOrderBtn() {
+      var show = false;
+      document.querySelectorAll('.qty-badge').forEach(function(badge) {
+        if (parseInt(badge.textContent) > 0) show = true;
+      });
+      var btn = document.getElementById('place-order-btn');
+      if (!btn) return;
+      if (show) btn.classList.add('show');
+      else btn.classList.remove('show');
+    }
+    function showOrderModal() {
+      var items = document.querySelectorAll('td');
+      var summary = [];
+      items.forEach(function(td) {
+        var name = td.dataset.name || td.querySelector('h3')?.innerText;
+        var price = td.dataset.price || td.querySelector('p')?.innerText.match(/\d+/)?.[0];
+        var qty = td.querySelector('.qty-badge')?.textContent;
+        if (name && price && qty && parseInt(qty) > 0) summary.push({ name, price, qty });
+      });
+      var list = document.getElementById('order-summary-list');
+      list.innerHTML = '';
+      var total = 0;
+      summary.forEach(function(item) {
+        var li = document.createElement('li');
+        li.textContent = item.name + ' x ' + item.qty + ' = ₹' + (parseInt(item.price)*parseInt(item.qty));
+        total += parseInt(item.price)*parseInt(item.qty);
+        list.appendChild(li);
+      });
+      document.getElementById('order-total').textContent = 'Total: ₹' + total;
+      document.getElementById('order-modal').style.display = 'flex';
+    }
+    function closeOrderModal() { document.getElementById('order-modal').style.display = 'none'; }
+    function confirmOrder() {
+      alert('Order placed! Thank you.');
+      closeOrderModal();
+      document.querySelectorAll('.qty-badge').forEach(function(badge) {
+        badge.textContent = 0;
+        badge.closest('.img-box').classList.remove('has-qty');
+      });
+      updateOrderBtn();
+    }
+    window.addEventListener('click', function(e) {
+      var modal = document.getElementById('order-modal');
+      if (modal && e.target === modal) closeOrderModal();
+    });
+  </script>
+</body>
+</html>

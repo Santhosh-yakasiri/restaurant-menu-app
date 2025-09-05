@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MENU IN VEG</title>
+  <style>
+    body {
+      background: linear-gradient(to right top, #E6FFE6, #fdfdc4, #ffecd2);
+      color: #2F4F4F;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      animation: fadeInBody 1s ease-in;
+    }
+
+    h1 {
+      text-align: center;
+      background: linear-gradient(to right, #2F4F4F, #4E6656);
+      color: white;
+      padding: 20px;
+      margin: 0;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    table {
+      width: 90%;
+      margin: 30px auto;
+      border-spacing: 30px;
+    }
+
+    td {
+      text-align: center;
+      vertical-align: top;
+      padding: 10px;
+      border-radius: 15px;
+      background: linear-gradient(to bottom right, #ffffff, #f0fff0);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    td:hover {
+      background: linear-gradient(to bottom right, #e0ffe0, #ffffcc);
+      transform: scale(1.02);
+    }
+
+    img {
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s, box-shadow 0.3s;
+      width: 100%;
+      max-width: 400px;
+      height: auto;
+    }
+
+    img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    h3 {
+      margin-top: 10px;
+      color: #006400;
+      text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+    }
+
+    input[type="submit"] {
+      background-color: #2F4F4F;
+      color: white;
+      padding: 10px 30px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s, box-shadow 0.3s;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    input[type="submit"]:hover {
+      background-color: #006400;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    center b {
+      display: block;
+      margin-top: 10px;
+      color: #2F4F4F;
+    }
+
+    hr {
+      border: none;
+      border-top: 2px dashed #2F4F4F;
+      margin: 20px 0;
+    }
+
+    @media (max-width: 768px) {
+      table, tr, td {
+        display: block;
+        width: 100%;
+        text-align: center;
+      }
+
+      td {
+        margin-bottom: 30px;
+      }
+
+      img {
+        max-width: 90%;
+      }
+    }
+
+    @keyframes fadeInBody {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <h1>VEG-MENU</h1>
+  <hr>
+  <table>
+    <tr>
+      <td>
+        <a href="vegstarters.html">
+          <img src="vegstarter1.jpg" alt="Starters">
+        </a>
+        <h3>STARTERS</h3>
+      </td>
+      <td>
+        <a href="vegsoups.html">
+          <img src="vegsoups/1.jpg" alt="Soups">
+        </a>
+        <h3>SOUPS</h3>
+      </td>
+      <td>
+        <a href="vegpizzas.html">
+          <img src="vegpizzas/0.jpg" alt="Pizzas">
+        </a>
+        <h3>PIZZAS</h3>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="vegburgers.html">
+          <img src="vegburgers/0.jpg" alt="Burgers">
+        </a>
+        <h3>BURGERS</h3>
+      </td>
+      <td>
+        <a href="vegbiriyani.html">
+          <img src="vegbiriyanis/0.jpeg" alt="Biriyanis">
+        </a>
+        <h3>BIRIYANIS</h3>
+      </td>
+      <td>
+        <a href="vegnoodles.html">
+          <img src="vegnoodles/0.jpg" alt="Noodles">
+        </a>
+        <h3>NOODLES</h3>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3" style="text-align: center;">
+        <a href="vegthali.html">
+          <img src="vegthali/0.jpg" alt="Thali" style="max-width: 300px; height: 200px;">
+        </a>
+        <h3>THALI</h3>
+      </td>
+    </tr>
+  </table>
+  <hr>
+  <center>
+    <a href="majorproject1.html">
+      <input type="submit" value="Back">
+    </a>
+    <b>GO TO MAIN MENU</b>
+  </center>
+</body>
+</html>
